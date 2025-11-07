@@ -1,0 +1,51 @@
+name: Sync upstream osint
+
+on:
+  workflow_dispatch:
+    inputs:
+      upstream_ref:
+        description: Upstream branch or tag to mirror
+        required: false
+        default: master
+
+permissions:
+  contents: write
+
+env:
+  UPSTREAM_REPO: https://github.com/0x4rk0/0x4rk0.github.io.git
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git author
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Mirror upstream content
+        env:
+          UPSTREAM_REF: ${{ inputs.upstream_ref }}
+        run: |
+          git clone --depth 1 --branch "$UPSTREAM_REF" "$UPSTREAM_REPO" /tmp/upstream
+          rsync -av --delete \
+            --exclude '.git' \
+            --exclude '.github' \
+            /tmp/upstream/osint/ "$GITHUB_WORKSPACE/"
+
+      - name: Commit and push changes
+        env:
+          TARGET_BRANCH: ${{ github.ref_name }}
+        run: |
+          if git status --short | grep -q .; then
+            git add -A
+            git commit -m "Sync from upstream osint"
+            git push origin "HEAD:$TARGET_BRANCH"
+          else
+            echo "No changes to commit"
+          fi
