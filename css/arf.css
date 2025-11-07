@@ -1,5 +1,50 @@
+:root {
+  color-scheme: light;
+  --bg-color: #ffffff;
+  --panel-bg: #f6f8fa;
+  --panel-border: #d0d7de;
+  --text-color: #0f172a;
+  --muted-text: #475569;
+  --link-color: #1f6feb;
+  --legend-bg: #ffffff;
+  --node-outline: steelblue;
+  --node-fill: #ffffff;
+  --link-stroke: #4b5563;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg-color: #0f172a;
+  --panel-bg: #1e293b;
+  --panel-border: #334155;
+  --text-color: #e2e8f0;
+  --muted-text: #94a3b8;
+  --link-color: #93c5fd;
+  --legend-bg: #1e293b;
+  --node-outline: #93c5fd;
+  --node-fill: #0f172a;
+  --link-stroke: #64748b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --bg-color: #0f172a;
+    --panel-bg: #1e293b;
+    --panel-border: #334155;
+    --text-color: #e2e8f0;
+    --muted-text: #94a3b8;
+    --link-color: #93c5fd;
+    --legend-bg: #1e293b;
+    --node-outline: #93c5fd;
+    --node-fill: #0f172a;
+    --link-stroke: #94a3b8;
+  }
+}
+
 body {
-  background-color: #ffffff;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-size: 14px;
   font-family: "Helvetica Neue", Helvetica;
   margin: 0;
@@ -14,27 +59,44 @@ body {
 
 #primary-nav {
   display: flex;
+  justify-content: space-between;
   gap: 12px;
   margin: 20px auto 10px;
   max-width: 720px;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 12px;
+  flex: 1;
 }
 
 .nav-link {
   flex: 1;
   text-align: center;
   padding: 10px 12px;
-  border: 1px solid #d0d7de;
+  border: 1px solid var(--panel-border);
   border-radius: 6px;
   text-decoration: none;
-  color: #1f2328;
+  color: var(--text-color);
   font-weight: 600;
-  background: #f6f8fa;
+  background: var(--panel-bg);
 }
 
 .nav-link.active {
-  background: #1f6feb;
+  background: var(--link-color);
   color: #fff;
-  border-color: #1f6feb;
+  border-color: var(--link-color);
+}
+
+.theme-toggle {
+  border: 1px solid var(--panel-border);
+  background: var(--panel-bg);
+  color: var(--text-color);
+  border-radius: 6px;
+  padding: 8px 10px;
+  cursor: pointer;
 }
 
 #header {
@@ -44,14 +106,17 @@ body {
   text-align: center;
 }
 
-
 .legend {
   position: absolute;
   top: 0px;
   right: 0;
   width: 330px;
   font-size: 11px;
-  color: #000;
+  color: var(--text-color);
+  background: var(--legend-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  padding: 8px;
 }
 
 .node {
@@ -60,25 +125,33 @@ body {
 
 .node circle {
   cursor: pointer;
-  fill: #fff;
-  stroke: steelblue;
+  fill: var(--node-fill);
+  stroke: var(--node-outline);
   stroke-width: 1.5px;
 }
 
 .node text {
   font-size: 12px;
-  fill: rgb(0, 0, 0);
+  fill: var(--text-color);
 }
 
 path.link {
   fill: none;
-  stroke: #ccc;
+  stroke: var(--link-stroke);
   stroke-width: 1px;
 }
 
 @media (max-width: 768px) {
   #header {
     font-size: 28px;
+  }
+
+  #primary-nav {
+    flex-direction: column;
+  }
+
+  .nav-links {
+    width: 100%;
   }
 
   .legend {
@@ -89,14 +162,5 @@ path.link {
 
   body {
     padding: 0 6px;
-  }
-
-  #primary-nav {
-    flex-direction: column;
-  }
-
-  .preview-actions button {
-    margin-left: 0;
-    margin-right: 4px;
   }
 }

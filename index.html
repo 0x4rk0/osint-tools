@@ -10,8 +10,13 @@
   <body>
     <div id="body">
       <nav id="primary-nav">
-        <a href="index.html" class="nav-link active">Explorer</a>
-        <a href="contribute.html" class="nav-link">Contribute</a>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link active">Explorer</a>
+          <a href="contribute.html" class="nav-link">Contribute</a>
+        </div>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle dark mode">
+          <span class="theme-toggle__icon">🌙</span>
+        </button>
       </nav>
       <div id="header">
         OSINT by Country Framework
@@ -20,6 +25,7 @@
       <div id="explorer"></div>
     </div>
 
+    <script src="js/theme.js"></script>
     <script src="js/arf.js"></script>
 
     <div class="legend"><p>(T) - Indicates a link to a tool that must be installed and run locally<br>
