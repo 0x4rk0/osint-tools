@@ -3,7 +3,8 @@
   "main": "index.html",
   "homepage": "https://github.com/lockfale/ARF",
   "authors": [
-    "Justin Nordine (s0lray)"
+    "Justin Nordine (s0lray)",
+    "Cody Bernardy 0x4rk0"
   ],
   "description": "Advanced Reconnaissance Framework",
   "license": "",

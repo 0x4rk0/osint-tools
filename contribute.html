@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Contribute to OSINT by Country</title>
+    <link rel="stylesheet" href="css/arf.css" />
+    <link rel="stylesheet" href="css/contribute.css" />
+    <script type="text/javascript" src="js/d3.v3.min.js"></script>
+  </head>
+  <body>
+    <div id="body">
+      <nav id="primary-nav">
+        <a href="index.html" class="nav-link">Explorer</a>
+        <a href="contribute.html" class="nav-link active">Contribute</a>
+      </nav>
+      <header id="header">
+        Contribute a Resource
+          <hr/>
+      </header>
+      <section id="explorer-pane">
+        <h2>Explorer</h2>
+        <p class="explorer-hint">Use the tree below to pick the exact branch. This panel is scrollable so the forms stay in view.</p>
+        <div id="explorer" class="explorer-shell"></div>
+      </section>
+      <section id="resource-panel">
+        <div class="resource-target">Adding under: <span id="resource-target-path">(select a node on the explorer first)</span></div>
+        <div class="resource-fields">
+          <label for="resource-name">Name</label>
+          <input id="resource-name" type="text" placeholder="Example: County GIS Viewer" />
+        </div>
+        <div class="resource-fields">
+          <label for="resource-link">URL</label>
+          <input id="resource-link" type="url" placeholder="https://example.com" />
+        </div>
+        <button id="add-resource" disabled>Add Resource</button>
+      </section>
+      <section id="json-preview">
+        <div class="json-preview__header">
+          <span>Updated branch JSON</span>
+          <div class="preview-actions">
+            <button id="copy-json">Copy JSON</button>
+            <button id="download-json">Download JSON</button>
+          </div>
+        </div>
+        <textarea id="json-output" readonly></textarea>
+      </section>
+    </div>
+
+    <div class="legend"><p>(T) - Indicates a link to a tool that must be installed and run locally<br>
+    (D) - Google Dork, for more information: <a href="https://en.wikipedia.org/wiki/Google_hacking">Google Hacking</a><br>
+    (R) - Requires registration<br>
+    (M) - Indicates a URL that contains the search term and the URL itself must be edited manually<br></p></div>
+
+    <script src="js/contribute.js"></script>
+  </body>
+</html>
